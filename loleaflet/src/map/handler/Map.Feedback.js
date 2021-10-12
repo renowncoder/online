@@ -48,7 +48,7 @@ L.Map.Feedback = L.Handler.extend({
 				if (this._iframeDialog && this._iframeDialog.hasLoaded())
 					this._iframeDialog.remove();
 
-				this._iframeDialog = L.iframeDialog(window.feebackLocation);
+				this._iframeDialog = L.iframeDialog(window.feedbackLocation);
 			}
 		}
 	},
@@ -76,6 +76,6 @@ L.Map.Feedback = L.Handler.extend({
 		}
 	}
 });
-if (window.feebackLocation && window.isLocalStorageAllowed) {
+if (window.feedbackLocation && window.isLocalStorageAllowed) {
 	L.Map.addInitHook('addHandler', 'feedback', L.Map.Feedback);
 }
