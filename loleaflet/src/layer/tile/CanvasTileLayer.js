@@ -5126,9 +5126,6 @@ L.CanvasTileLayer = L.Layer.extend({
 					if (!isAnyVexDialogActive())
 						this._onCellCursorShift(true);
 				}
-				if (e.statusType === 'alltilesloaded' && this._map.shouldWelcome()) {
-					this._map.showWelcomeDialog();
-				}
 			},
 			this);
 
