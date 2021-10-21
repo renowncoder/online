@@ -1620,8 +1620,8 @@ L.Control.Menubar = L.Control.extend({
 			});
 		} else if (id === 'about') {
 			this._map.showLOAboutDialog();
-		} else if (id === 'latestupdates') {
-			this._map.showWelcomeDialog(/*calledFromMenu=*/true);
+		} else if (id === 'latestupdates' && this._map.welcome) {
+			this._map.welcome.showWelcomeDialog();
 		} else if (id === 'report-an-issue') {
 			window.open('https://github.com/CollaboraOnline/online/issues', '_blank');
 		} else if (id === 'inserthyperlink') {
