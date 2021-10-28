@@ -410,6 +410,10 @@ msgstr ""
 msgid "Function Wizard"
 msgstr ""
 
+#: src/control/Control.FormulaBar.js:46
+msgid "cell address"
+msgstr ""
+
 #: src/control/Control.JSDialogBuilder.js:379
 msgid "Solid"
 msgstr ""
@@ -519,6 +523,14 @@ msgstr ""
 #: src/control/Control.Menubar.js:758 src/control/Control.Menubar.js:811
 #: src/control/Control.Menubar.js:866 src/control/Control.Menubar.js:911
 msgid "Share..."
+msgstr ""
+
+#: src/control/Control.Menubar.js:1748
+msgid "file type icon"
+msgstr ""
+
+#: src/control/Control.PartsPreview.js:180
+msgid "preview of page "
 msgstr ""
 
 #: src/control/Control.Menubar.js:61 src/control/Control.Menubar.js:310
