@@ -62,7 +62,17 @@ class TileCache
     std::shared_ptr<TileBeingRendered> findTileBeingRendered(const TileDesc& tile);
 
 public:
-    using Tile = std::shared_ptr<std::vector<char>>;
+    using Blob = std::shared_ptr<std::vector<char>>;
+    struct Tile
+    {
+        Tile() : _start(0) {}
+        Tile(size_t size) : _start(0), _keyFrame(std::make_shared<std::vector<char>>(size)) {}
+        operator bool() const { return _keyFrame != nullptr; }
+
+        TileWireId _start;
+        Blob _keyFrame; // FIXME: make this just the 1st item in deltas vector(?)
+        std::vector<Blob> _deltas;
+    };
 
     /// When the docURL is a non-file:// url, the timestamp has to be provided by the caller.
     /// For file:// url's, it's ignored.
@@ -113,8 +123,8 @@ public:
     // Saves a font / style / etc rendering
     void saveStream(StreamType type, const std::string& name, const char* data, size_t size);
 
-    /// Return the tile data if we have it, or nothing.
-    Tile lookupCachedStream(StreamType type, const std::string& name);
+    /// Return the data if we have it, or nothing.
+    Blob lookupCachedStream(StreamType type, const std::string& name);
 
     // The tiles parameter is an invalidatetiles: message as sent by the child process
     void invalidateTiles(const std::string& tiles, int normalizedViewId);
@@ -149,7 +159,7 @@ private:
     void invalidateTiles(int part, int x, int y, int width, int height, int normalizedViewId);
 
     /// Lookup tile in our cache.
-    TileCache::Tile findTile(const TileDesc &desc);
+    Tile findTile(const TileDesc &desc);
 
     static std::string cacheFileName(const TileDesc& tileDesc);
     static bool parseCacheFileName(const std::string& fileName, int& part, int& width, int& height, int& tilePosX, int& tilePosY, int& tileWidth, int& tileHeight, int& nviewid);
@@ -183,7 +193,7 @@ private:
                        TileDescCacheCompareEq> _tilesBeingRendered;
 
     // old-style file-name to data grab-bag.
-    std::map<std::string, Tile> _streamCache[static_cast<int>(StreamType::Last)];
+    std::map<std::string, Blob> _streamCache[static_cast<int>(StreamType::Last)];
 };
 
 /* vim:set shiftwidth=4 softtabstop=4 expandtab: */
